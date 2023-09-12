@@ -1,0 +1,4 @@
+notes
+
+
+src/components/SignUpForm/SignUpForm.jsx <--> users-service.js <--> users-api.js <-Internet-> server.js (Express)
