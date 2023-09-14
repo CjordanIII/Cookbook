@@ -10,6 +10,8 @@ const PORT = process.env.PORT||3001
 // middle Wares
 app.use(logger('dev'))
 app.use(express.json())
+//Check for a token and create an req.user prop in the requiest
+app.use(require('./config/checkToken'))
 
 //Configure both server-favicon and static middleware
 //to serve from the production 'build' folder

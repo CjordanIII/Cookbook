@@ -11,18 +11,17 @@ function App() {
   const [user, setUser] = useState(getUser()); // look for token
   console.log(user)
   return (
-
     <div className="App">
       {user ? (
         <>
-          <NavBar/>
+          <NavBar user={user} setUser={setUser}/>
           <Routes>
             <Route path="/orders/new" element={<NewOrderPage />} />
             <Route path="/orders" element={<OrderHistory />} />
           </Routes>
         </>
       ) : (
-        <AuthPage />
+        <AuthPage setUser={setUser}/>
       )}
     </div>
   );

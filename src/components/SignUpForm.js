@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signup } from "../utils/users-service";
-function SignUpForm(){
+function SignUpForm({setUser}){
     const [formData,setFormData] = useState({
         name:"",
         email:"",
@@ -26,6 +26,7 @@ function SignUpForm(){
           delete userFormData.error
           //sends obj (userdata ) to user functions
           const user = await signup(userFormData)
+          setUser(user)
         }catch(e){
           console.log(e)
           setFormData({
