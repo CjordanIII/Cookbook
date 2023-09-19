@@ -1,13 +1,18 @@
+
 const User = require('../../models/User')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+
+
 async function create(req,res){
+  console.log('from controllers line 5',req.body)
     try{
-        const user = await  User.create(req.body)
+        const user = await User.create(req.body)
+        console.log(user)
         const token = createJwt(user)
         res.json(token)
     }catch (error){ 
-        res.status(400).json.error
+        res.status(400).json(error)
 
     }
 
@@ -34,18 +39,32 @@ async function login(req, res) {
 }
 
 async function checkToken(req,res){
-  console.log(req.user)
-  res.json(req.exp)
+
+  await res.json(req.exp)
 }
 // helper function to create jwt token
 function createJwt(user){
     return jwt.sign({user},process.env.SECRET,{expiresIn:'24h'})
 }
 
+// curently7 woirking
+ async function deLete(req,res){
+  const user = req.user
 
-
-module.exports= {
-    create,
-    login,
-    checkToken
+// how to make work
+ try{
+  const Delete = await User.findByIdAndDelete(user._id)
+  localStorage.removeItem('SEItoken')
+ }catch(err){
+  res.send(err)
+ }
 }
+
+
+
+module.exports = {
+  create,
+  login,
+  checkToken,
+  deLete,
+};

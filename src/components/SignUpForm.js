@@ -21,11 +21,13 @@ function SignUpForm({setUser}){
         try{
   
           const userFormData = {...formData}
+          console.log(userFormData)
           // delete extra props
           delete userFormData.confirm
           delete userFormData.error
           //sends obj (userdata ) to user functions
           const user = await signup(userFormData)
+          console.log(user)
           setUser(user)
         }catch(e){
           console.log(e)

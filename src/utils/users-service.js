@@ -12,7 +12,9 @@ export async function signup(userData){
 export async function logOut(){
   localStorage.removeItem('SEItoken')
 }
-
+export async function delEte(){
+  localStorage.removeItem('SEItoken')
+}
 export async function checkToken(){
   const dateStr = await userApi.checkToken()
   return new Date(dateStr);
@@ -23,7 +25,6 @@ export async function login(credentials){
   localStorage.setItem('SEItoken',token)
   return getUser()
 }
-
 
 
 export function getToken() {

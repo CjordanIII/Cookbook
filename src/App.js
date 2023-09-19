@@ -9,7 +9,6 @@ import { getUser } from "./utils/users-service";
 
 function App() {
   const [user, setUser] = useState(getUser()); // look for token
-  console.log(user)
   return (
     <div className="App">
       {user ? (

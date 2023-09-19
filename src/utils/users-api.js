@@ -4,6 +4,7 @@ import { getToken } from "./users-service";
 const BASE_URL = "/api/users";
 
 export function signUp(userData) {
+  console.log(userData)
   return sendRequest(BASE_URL, "POST", userData);
 }
 
@@ -14,6 +15,14 @@ export function login(credentials) {
 export function checkToken(){
     return sendRequest(`${BASE_URL}/check-token`)
 }
+//change
+export function deLete(userData) {
+  return sendRequest(`${BASE_URL}/delete-user`, "DELETE", userData);
+}
+
+
+
+
 /*--- Helper Functions ---*/
 
 async function sendRequest(url, method = "GET", payload = null) {
