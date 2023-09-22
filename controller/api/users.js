@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt')
 
 
 async function create(req,res){
-  console.log('from controllers line 5',req.body)
     try{
         const user = await User.create(req.body)
         console.log(user)
@@ -60,6 +59,22 @@ function createJwt(user){
  }
 }
 
+// TODO add code
+async function updatedUser(req, res) {
+  console.log(req.body);
+  try {
+    const findUser = await User.findById(req.user._id);
+    const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+      new: true,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  // console.log("from line 68 in controlers api findUserAndUpdate",findUserAndUpdate);
+  // console.log("from line 69in controlers api findUser ", findUser);
+}
+
 
 
 module.exports = {
@@ -67,4 +82,5 @@ module.exports = {
   login,
   checkToken,
   deLete,
+  updatedUser,
 };

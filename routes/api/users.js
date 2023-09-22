@@ -11,7 +11,12 @@ router.post('/login',usersCtrl.login)
 //delete
 router.delete("/delete-user", usersCtrl.deLete);
 // make sure you are logged in ensure is middle ware
+
 router.get("/check-token", ensureLoggedIn, usersCtrl.checkToken);
+
+router.put("/update", ensureLoggedIn, usersCtrl.updatedUser);
+
+
 
 
 module.exports = router

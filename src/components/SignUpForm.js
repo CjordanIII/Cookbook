@@ -30,7 +30,6 @@ function SignUpForm({setUser}){
           console.log(user)
           setUser(user)
         }catch(e){
-          console.log(e)
           setFormData({
             ...formData,
             error:'Sign up Failed - Try again'

@@ -12,6 +12,8 @@ function NavBar({ user, setUser }) {
     userService.delEte()
     setUser(null);
   }
+
+
   return (
     <nav>
       <h3>Welcome {user.name}</h3>
@@ -24,6 +26,9 @@ function NavBar({ user, setUser }) {
       <Link to="/login" onClick={deleteUser}>
         Delete user
       </Link>
+      &nbsp;|
+      {/*TODO this should not be here move UpdateUser */}
+      <Link to="/update"> Update user</Link>
     </nav>
   );
 }

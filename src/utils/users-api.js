@@ -4,7 +4,6 @@ import { getToken } from "./users-service";
 const BASE_URL = "/api/users";
 
 export function signUp(userData) {
-  console.log(userData)
   return sendRequest(BASE_URL, "POST", userData);
 }
 
@@ -19,7 +18,11 @@ export function checkToken(){
 export function deLete(userData) {
   return sendRequest(`${BASE_URL}/delete-user`, "DELETE", userData);
 }
-
+//  TODO change later
+export function updateduser(userData){
+  console.log(userData)
+  return sendRequest(`${BASE_URL}/update`,"PUT",userData)
+}
 
 
 
