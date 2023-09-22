@@ -14,7 +14,7 @@ router.delete("/delete-user", usersCtrl.deLete);
 
 router.get("/check-token", ensureLoggedIn, usersCtrl.checkToken);
 
-router.put("/update", ensureLoggedIn, usersCtrl.updatedUser);
+router.put("/update", usersCtrl.updatedUser);
 
 
 

@@ -20,8 +20,7 @@ export function deLete(userData) {
 }
 //  TODO change later
 export function updateduser(userData){
-  console.log(userData)
-  return sendRequest(`${BASE_URL}/update`,"PUT",userData)
+  return sendRequest(`${BASE_URL}/update`,"PUT", userData)
 }
 
 

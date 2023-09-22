@@ -4,12 +4,15 @@ const favicon = require('serve-favicon')
 const logger = require('morgan')
 require('dotenv').config()
 require('./config/database')
+const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT||3001
 
 // middle Wares
 app.use(logger('dev'))
 app.use(express.json())
+app.use(cors());
+app.use(express.urlencoded({ extended: false }));
 //Check for a token and create an req.user prop in the requiest
 app.use(require('./config/checkToken'))
 

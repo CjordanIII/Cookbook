@@ -3,7 +3,8 @@ const User = require('../../models/User')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-
+const saltRounds = 6
+// createing user and taoken
 async function create(req,res){
     try{
         const user = await User.create(req.body)
@@ -59,22 +60,34 @@ function createJwt(user){
  }
 }
 
-// TODO add code
+// Eddit contorller 
 async function updatedUser(req, res) {
-  console.log(req.body);
   try {
+    // takes (req.body) req.headers.body and turning into js
+    let headerBody = JSON.parse(req.headers.body);
+    //seperating password to hash
+    let password = headerBody.password
+    //saving has to data base
+    bcrypt.hash(password,saltRounds,function(err,hash){
+      if(err){
+        console.log('error hasing password: ',err)
+        return;
+      }
+       headerBody.password =  hash;
+    });
+
     const findUser = await User.findById(req.user._id);
-    const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+    const updatedUser = await User.findByIdAndUpdate(req.user._id, headerBody, {
       new: true,
     });
+
+    // Optionally, send a response
+    res.status(200).json(updatedUser);
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
   }
-
-  // console.log("from line 68 in controlers api findUserAndUpdate",findUserAndUpdate);
-  // console.log("from line 69in controlers api findUser ", findUser);
 }
-
 
 
 module.exports = {
