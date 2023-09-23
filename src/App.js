@@ -3,10 +3,16 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import AuthPage from "./pages/AuthPage";
-import NewOrderPage from "./pages/NewOrderPage";
-import OrderHistory from "./pages/OrderHistoryPage";
+import Recipes from "./pages/Recipes";
+import RecipesNew from "./pages/RecipesNew";
 import UpdateUser from "./pages/UpdateUser";
 import { getUser } from "./utils/users-service";
+
+
+
+
+
+
 function App() {
   const [user, setUser] = useState(getUser()); // look for token
   return (
@@ -15,9 +21,12 @@ function App() {
         <>
           <NavBar user={user} setUser={setUser} />
           <Routes>
-            <Route path="/orders/new" element={<NewOrderPage />} />
-            <Route path="/orders" element={<OrderHistory />} />
-            <Route path="/update" element={<UpdateUser user={user} setUser ={setUser}/>} />
+            <Route path="/recipes/new" element={<RecipesNew />} />
+            <Route path="/recipes" element={<Recipes />} />
+            <Route
+              path="/update"
+              element={<UpdateUser user={user} setUser={setUser} />}
+            />
           </Routes>
         </>
       ) : (

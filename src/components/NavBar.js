@@ -17,8 +17,8 @@ function NavBar({ user, setUser }) {
   return (
     <nav>
       <h3>Welcome {user.name}</h3>
-      <Link to="/orders"> Orders</Link>&nbsp;|&nbsp;
-      <Link to="/orders/new">New Order</Link>&nbsp;|
+      <Link to="/recipes"> Recipes</Link>&nbsp;|&nbsp;
+      <Link to="/recipes/new">New Order</Link>&nbsp;|
       <Link to="" onClick={handleLogout}>
         Log out
       </Link>

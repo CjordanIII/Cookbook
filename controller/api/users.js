@@ -47,11 +47,11 @@ function createJwt(user){
     return jwt.sign({user},process.env.SECRET,{expiresIn:'24h'})
 }
 
-// curently7 woirking
+//*Delete 
  async function deLete(req,res){
   const user = req.user
 
-// how to make work
+// finds user and deletes user
  try{
   const Delete = await User.findByIdAndDelete(user._id)
   localStorage.removeItem('SEItoken')
@@ -60,7 +60,8 @@ function createJwt(user){
  }
 }
 
-// Eddit contorller 
+//*Edit controller
+//TODO add a redirect
 async function updatedUser(req, res) {
   try {
     // takes (req.body) req.headers.body and turning into js
