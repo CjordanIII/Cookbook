@@ -1,51 +1,78 @@
-import { useState } from 'react'
-
+import { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import * as userApi from '../utils/users-api';
 function RecipesNew() {
-// handle img upload
-const [file,setFile] = useState()
-const [liInput,setliInput] = useState(null)
-// gives img a link
-const handleChange = (e) =>{
-  console.log(e.target.files)
-  setFile(URL.createObjectURL(e.target.files[0]))
-}
-// gets rid of annoying img outline 
-const display = file ? true : false;
+  // Handle img upload
+  const [file, setFile] = useState(null);
+  //TODO change the files[from zero ]
+  // Handle image input
+  const handleImage = (e) => {
+    setFile(URL.createObjectURL(e.target.files[0]));
+  };
 
+  const display = !!file; // Simplified the display check
 
-//adds li to ingredient
-const handleLi =  (e)=>{
-  e.preventDefault();
-  
+  // Handle creative text box (quill)
+  const [ingredient, setIngredient] = useState("");
+  const [instructions, setInstructions] = useState("");
 
- setliInput(e.target.value)
-}
+  const handleChangeInForm = (e) => {
+    e.preventDefault();
+    // Create an object with the form data
+    const formData = {
+      image: file,
+      ingredient: ingredient,
+      instructions: instructions,
+    };
+    userApi.newRecipesNewData(formData); // !You can now send formData to the backend
+  };
 
-console.log(liInput);
+  // Handle ingredient input
+  const reactQuillValue0 = (e) => {
+    setIngredient(e);
+  };
 
+  // Handle instructions input
+  const reactQuillValue1 = (e) => {
+    setInstructions(e);
+  };
 
- //TODO finish form send it to the back end 
   return (
     <div>
-      <form>
+      <form onSubmit={handleChangeInForm}>
         <label htmlFor="image">Image</label>
-        <input type="file" onChange={handleChange} name="image" />
-        <ul>
-          <li>{liInput}</li>
-        </ul>
-        &nbsp;
+        <input type="file" onChange={handleImage} name="image" multiple />
+
         <label htmlFor="ingredient">Ingredient</label>
-        <input type="text" onChange={handleLi} name="ingredient"></input>
+        <div className="my-editing-area">
+          <ReactQuill
+            style={{ backgroundColor: "white" }}
+            type="text"
+            theme="snow"
+            value={ingredient} // Use ingredient state for value
+            onChange={reactQuillValue0} // Use reactQuillValue0 for onChange
+          />
+        </div>
+        <label htmlFor="instructions">Instructions</label>
+        <div>
+          <ReactQuill
+            style={{ backgroundColor: "white" }}
+            type="text"
+            theme="snow"
+            value={instructions} // Use instructions state for value
+            onChange={reactQuillValue1} // Use reactQuillValue1 for onChange
+          />
+        </div>
+
+        <button type="submit">Post</button>
       </form>
-      {/* gets rid of outline */}
-      {display ? (
+      {display && (
         <img
-          alt="none"
+          alt="uploaded"
           src={file}
           style={{ width: "700px", height: "700px" }}
         />
-      ) : (
-        ""
       )}
     </div>
   );

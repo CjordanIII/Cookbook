@@ -23,6 +23,10 @@ export function updateduser(userData){
   return sendRequest(`${BASE_URL}/update`,"PUT", userData)
 }
 
+export function newRecipesNewData(recipesObj){
+  return sendRequest(`${BASE_URL}/recipes`, "POST", recipesObj);
+}
+
 
 
 /*--- Helper Functions ---*/

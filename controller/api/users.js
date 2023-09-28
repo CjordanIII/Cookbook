@@ -90,6 +90,10 @@ async function updatedUser(req, res) {
   }
 }
 
+async function newRecipe(req,res){
+ const recipesData = JSON.parse(req.headers.body);
+ res.send(recipesData)
+}
 
 module.exports = {
   create,
@@ -97,4 +101,5 @@ module.exports = {
   checkToken,
   deLete,
   updatedUser,
+  newRecipe,
 };

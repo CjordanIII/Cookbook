@@ -16,7 +16,7 @@ router.get("/check-token", ensureLoggedIn, usersCtrl.checkToken);
 
 router.put("/update", usersCtrl.updatedUser);
 
-
+router.post("/recipes", usersCtrl.newRecipe);
 
 
 module.exports = router
