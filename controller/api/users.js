@@ -1,5 +1,6 @@
 
 const User = require('../../models/User')
+const Post = require('../../models/userData')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
@@ -13,7 +14,6 @@ async function create(req,res){
         res.json(token)
     }catch (error){ 
         res.status(400).json(error)
-
     }
 
 }
@@ -89,10 +89,23 @@ async function updatedUser(req, res) {
     res.status(500).json({ error: "Internal server error" });
   }
 }
-
+//TODO send teh user id along with the this in the payload
 async function newRecipe(req,res){
- const recipesData = JSON.parse(req.headers.body);
- res.send(recipesData)
+
+  try{
+    const recipesData = JSON.parse(req.headers.body);
+    const token = recipesData.token;
+    //Decoded token object
+    const decoded = jwt.verify(token, process.env.SECRET);
+    // current user id
+    const userId = decoded.user._id
+    recipesData.userid = userId;
+    delete recipesData.token;
+    const userPost = await Post.create(recipesData);
+
+  }catch(e){
+    res.status(400).json({error:"Cannot leave text boxes blank"})
+  }
 }
 
 module.exports = {
@@ -102,4 +115,4 @@ module.exports = {
   deLete,
   updatedUser,
   newRecipe,
-};
+}

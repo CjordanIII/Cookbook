@@ -2,6 +2,9 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import * as userApi from '../utils/users-api';
+
+
+
 function RecipesNew() {
   // Handle img upload
   const [file, setFile] = useState(null);
@@ -20,11 +23,14 @@ function RecipesNew() {
   const handleChangeInForm = (e) => {
     e.preventDefault();
     // Create an object with the form data
+    const storedId = localStorage.getItem("SEItoken")
     const formData = {
       image: file,
       ingredient: ingredient,
       instructions: instructions,
+      token: storedId,
     };
+    
     userApi.newRecipesNewData(formData); // !You can now send formData to the backend
   };
 

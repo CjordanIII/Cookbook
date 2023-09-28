@@ -16,6 +16,7 @@ router.get("/check-token", ensureLoggedIn, usersCtrl.checkToken);
 
 router.put("/update", usersCtrl.updatedUser);
 
+//TODO add middle multer
 router.post("/recipes", usersCtrl.newRecipe);
 
 

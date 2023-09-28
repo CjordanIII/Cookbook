@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema
-const data = require('./userData');
+
 
 const SALT_ROUNDS = 6;
 
@@ -20,8 +20,7 @@ const userSchema = new Schema({
     trim: true,
     minLength: 3,
     required: true,
-  },
-  userdata:[data]
+  }
 
 },{timestamps:true,
     toJSON: {
