@@ -89,7 +89,7 @@ async function updatedUser(req, res) {
     res.status(500).json({ error: "Internal server error" });
   }
 }
-//TODO send teh user id along with the this in the payload
+//TODO handle img
 async function newRecipe(req,res){
 
   try{
@@ -104,7 +104,8 @@ async function newRecipe(req,res){
     const userPost = await Post.create(recipesData);
 
   }catch(e){
-    res.status(400).json({error:"Cannot leave text boxes blank"})
+    console.log(e)
+    res.status(400).json({error:e._message})
   }
 }
 
