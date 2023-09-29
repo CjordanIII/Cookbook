@@ -7,11 +7,16 @@ require('./config/database')
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT||3001
-
+//!! For deployment only 
+// const corseOptions = require('./config/cores')
 // middle Wares
 app.use(logger('dev'))
 app.use(express.json())
-app.use(cors());
+//!! For deployment only 
+// app.use(cores(corseOptions))
+
+//!! For local envioment only
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.urlencoded({ extended: false }));
 //Check for a token and create an req.user prop in the requiest
 app.use(require('./config/checkToken'))

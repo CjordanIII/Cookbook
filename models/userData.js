@@ -5,8 +5,13 @@ const Schema = mongoose.Schema;
 
 const userDataSchema = new Schema(
   {
-    userid:{
-      type:String
+    username: {
+      type: String,
+      required: true,
+    },
+    userid: {
+      type: String,
+      required: true,
     },
     image: {
       type: String,
@@ -17,11 +22,11 @@ const userDataSchema = new Schema(
       required: true,
       minLength: 5,
     },
-    instructions:{
-      type:String,
-      required:true,
+    instructions: {
+      type: String,
+      required: true,
       minLength: 5,
-    }
+    },
   },
   {
     timestamps: true,

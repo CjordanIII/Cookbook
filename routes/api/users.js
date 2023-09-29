@@ -19,5 +19,7 @@ router.put("/update", usersCtrl.updatedUser);
 //TODO add middle multer
 router.post("/recipes", usersCtrl.newRecipe);
 
+router.get("/recipes",  usersCtrl.recipesData);
+
 
 module.exports = router

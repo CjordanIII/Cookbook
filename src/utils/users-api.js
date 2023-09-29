@@ -26,6 +26,9 @@ export function updateduser(userData){
 export function newRecipesNewData(recipesObj){
   return sendRequest(`${BASE_URL}/recipes`, "POST", recipesObj);
 }
+export function getRecipesNewData() {
+  return sendRequest(`${BASE_URL}/recipes`);
+}
 
 
 

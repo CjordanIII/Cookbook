@@ -4,6 +4,7 @@ const Post = require('../../models/userData')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
+
 const saltRounds = 6
 // createing user and taoken
 async function create(req,res){
@@ -90,6 +91,7 @@ async function updatedUser(req, res) {
   }
 }
 //TODO handle img
+// newRecipes send to database
 async function newRecipe(req,res){
 
   try{
@@ -99,7 +101,9 @@ async function newRecipe(req,res){
     const decoded = jwt.verify(token, process.env.SECRET);
     // current user id
     const userId = decoded.user._id
+    const userName = decoded.user.name
     recipesData.userid = userId;
+    recipesData.username = userName;
     delete recipesData.token;
     const userPost = await Post.create(recipesData);
 
@@ -109,6 +113,15 @@ async function newRecipe(req,res){
   }
 }
 
+//request post from database
+
+async function recipesData(req,res){
+  const allData = await Post.find({})
+  
+  res.json(allData)
+  //  const findPost = await Post.findById()
+}
+
 module.exports = {
   create,
   login,
@@ -116,4 +129,5 @@ module.exports = {
   deLete,
   updatedUser,
   newRecipe,
-}
+  recipesData,
+};
